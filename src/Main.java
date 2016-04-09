@@ -1,4 +1,3 @@
-import java.net.HttpURLConnection;
 import java.io.IOException;
 
 import java.util.HashMap;
@@ -7,19 +6,13 @@ import java.util.HashMap;
  * Created by dumitru on 07.04.16.
  */
 public class Main {
-    public static void main(String args[]) throws IOException {
+    public static void main(String args[]) {
         HashMap<String,String> data = new HashMap<>();
 
-        data.put("fizz","buzz");
-        Request req = new Request();
-        req.setHost("http://requestb.in");
-        req.setPath("/18xlmmy1");
-        req.setPort(80);
-        req.setMethod("POST ");
-        req.setData(data);
-        req.send();
+        Bot bot = new Bot("212445639:AAE3OrJuCIOGwnUaOrVjv20YoT-j3i6bPio");
+        String chatId = "-91608308";
+        String text = "Hello from Java";
 
-        System.out.println(req.response);
-
+        System.out.println(bot.sendMessage(chatId,text));
     }
 }
