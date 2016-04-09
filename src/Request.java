@@ -25,7 +25,7 @@ public class Request {
         data = new HashMap<>();
     }
 
-    Request(String url){
+    Request(String url) {
         this.url = url;
         data = new HashMap<>();
     }
@@ -50,18 +50,20 @@ public class Request {
         this.method = method;
     }
 
-    public void send() {
+    public void send() throws UnsupportedEncodingException {
         URL url;
         HttpURLConnection connection = null;
 
         String body = "";
         String targetURL;
-        if(this.url == null)
+        if (this.url == null)
             targetURL = String.format("%s%s", host, path);
         else
             targetURL = this.url;
 
         for (Map.Entry<String, String> entry : data.entrySet()) {
+            String key = URLEncoder.encode(entry.getKey());
+            String value = URLEncoder.encode(entry.getValue());
             body += String.format("%s=%s&", entry.getKey(), entry.getValue());
         }
         if (body.length() > 0) {
