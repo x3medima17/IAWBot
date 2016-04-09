@@ -19,8 +19,14 @@ public class Request {
     public int port;
     public HashMap<String, String> data;
     public String response;
+    public String url;
 
     Request() {
+        data = new HashMap<>();
+    }
+
+    Request(String url){
+        this.url = url;
         data = new HashMap<>();
     }
 
@@ -44,13 +50,16 @@ public class Request {
         this.method = method;
     }
 
-    public void send()
-    {
+    public void send() {
         URL url;
         HttpURLConnection connection = null;
 
         String body = "";
-        String targetURL = String.format("%s%s", host,path);
+        String targetURL;
+        if(this.url == null)
+            targetURL = String.format("%s%s", host, path);
+        else
+            targetURL = this.url;
 
         for (Map.Entry<String, String> entry : data.entrySet()) {
             body += String.format("%s=%s&", entry.getKey(), entry.getValue());
@@ -62,9 +71,9 @@ public class Request {
         try {
             //Create connection
             url = new URL(targetURL);
-            connection = (HttpURLConnection)url.openConnection();
+            connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod(method);
-            connection.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 
             connection.setRequestProperty("Content-Length", "" +
                     Integer.toString(body.getBytes().length));
@@ -74,18 +83,18 @@ public class Request {
             connection.setDoOutput(true);
 
             //Send request
-            DataOutputStream wr = new DataOutputStream (
-                    connection.getOutputStream ());
-            wr.writeBytes (body);
-            wr.flush ();
-            wr.close ();
+            DataOutputStream wr = new DataOutputStream(
+                    connection.getOutputStream());
+            wr.writeBytes(body);
+            wr.flush();
+            wr.close();
 
             //Get Response
             InputStream is = connection.getInputStream();
             BufferedReader rd = new BufferedReader(new InputStreamReader(is));
             String line;
             StringBuffer response = new StringBuffer();
-            while((line = rd.readLine()) != null) {
+            while ((line = rd.readLine()) != null) {
                 response.append(line);
                 response.append('\n');
 
@@ -96,7 +105,7 @@ public class Request {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if(connection != null) {
+            if (connection != null) {
                 connection.disconnect();
             }
         }
