@@ -26,5 +26,14 @@ public class Bot {
         return req.response;
     }
 
+    public String getMe() throws  UnsupportedEncodingException{
+        String url = String.format("%s%s/getMe",prefix,token);
+        Request req = new Request(url);
+        req.setMethod("GET");
+        req.setPort(80);
+        req.send();
+        return req.response;
+    }
+
 
 }
