@@ -17,6 +17,10 @@ public class Response {
         this.errno = errno;
     }
 
+    String getResult(){
+        return result;
+    }
+    
     static Response fromJson(String raw) {
 
         JsonElement json = new JsonParser().parse(raw);
