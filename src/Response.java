@@ -20,7 +20,7 @@ public class Response {
     String getResult(){
         return result;
     }
-    
+
     static Response fromJson(String raw) {
 
         JsonElement json = new JsonParser().parse(raw);
