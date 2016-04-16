@@ -1,5 +1,31 @@
+import java.io.IOException;
+import java.util.ArrayList;
+
 /**
  * Created by dumitru on 17.04.16.
  */
 public class Application {
+    private ArrayList<Tuple> handlers;
+    private Bot bot;
+    private int offset;
+
+    public Application(ArrayList<Tuple> handlers, Bot bot) {
+        this.handlers = handlers;
+        this.bot = bot;
+        this.offset = 0;
+    }
+    
+
+    public void startIoLoop() throws IOException, InterruptedException {
+        while (true) {
+            ArrayList<Update> updates = bot.getUpdates(offset);
+            for (Update update : updates) {
+                String command = update.getMessage().getText();
+                offset = update.getUpdateId()+1;
+                System.out.println(command);
+
+            }
+            Thread.sleep(400);
+        }
+    }
 }
