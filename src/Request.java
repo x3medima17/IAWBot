@@ -64,7 +64,7 @@ public class Request {
         for (Map.Entry<String, String> entry : data.entrySet()) {
             String key = URLEncoder.encode(entry.getKey());
             String value = URLEncoder.encode(entry.getValue());
-            body += String.format("%s=%s&", entry.getKey(), entry.getValue());
+            body += String.format("%s=%s&", key, value);
         }
         if (body.length() > 0) {
             body = body.substring(0, body.length() - 1);

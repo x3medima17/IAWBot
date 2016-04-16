@@ -14,9 +14,9 @@ public class Bot {
 
     Bot(){}
 
-    public String sendMessage(String chatId, String text) throws UnsupportedEncodingException {
+    public String sendMessage(int chatId, String text) throws UnsupportedEncodingException {
         HashMap<String, String> data = new HashMap<>();
-        data.put("chat_id", chatId);
+        data.put("chat_id", Integer.toString(chatId));
         data.put("text", text);
 
         String url = String.format("%s%s/sendMessage", prefix, token);
@@ -40,8 +40,10 @@ public class Bot {
 
     public String getUpdates(int offset) throws UnsupportedEncodingException {
         HashMap<String, String> data = new HashMap<>();
+        data.put("offset",Integer.toString(offset));
         String url = String.format("%s%s/getUpdates", prefix, token);
         Request req = new Request(url);
+        req.setData(data);
         req.setMethod("GET");
         req.setPort(80);
         req.setData(data);
