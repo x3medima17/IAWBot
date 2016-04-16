@@ -16,11 +16,9 @@ public class Main {
 
         int offset = 0;
         while(true){
-            Response r = Response.fromJson(bot.getUpdates(offset));
-            JsonElement json = new JsonParser().parse(r.getResult());
 
-            for (JsonElement item : json.getAsJsonArray()) {
-                Update curr =  Update.fromJson(item.toString());
+            for (Update item : bot.getUpdates(offset)) {
+                Update curr =  item;
                 offset = curr.getUpdateId()+1;
                 System.out.println(curr.getMessage().getText());
                 bot.sendMessage(curr.getMessage().getChat().getId(), curr.getMessage().getText());

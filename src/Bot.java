@@ -1,4 +1,8 @@
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -38,7 +42,7 @@ public class Bot {
         return req.response;
     }
 
-    public String getUpdates(int offset) throws UnsupportedEncodingException {
+    public ArrayList<Update>  getUpdates(int offset) throws UnsupportedEncodingException {
         HashMap<String, String> data = new HashMap<>();
         data.put("offset",Integer.toString(offset));
         String url = String.format("%s%s/getUpdates", prefix, token);
@@ -48,7 +52,16 @@ public class Bot {
         req.setPort(80);
         req.setData(data);
         req.send();
-        return req.response;
+
+        Response r = Response.fromJson(req.getResponse());
+        JsonElement json = new JsonParser().parse(r.getResult());
+        ArrayList<Update> updates = new ArrayList<>();
+
+        for (JsonElement item : json.getAsJsonArray()) {
+            Update curr =  Update.fromJson(item.toString());
+            updates.add(curr);
+        }
+        return updates;
     }
 
 

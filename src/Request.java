@@ -21,6 +21,10 @@ public class Request {
     public String response;
     public String url;
 
+    public String getResponse() {
+        return response;
+    }
+
     Request() {
         data = new HashMap<>();
     }
