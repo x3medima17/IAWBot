@@ -1,7 +1,6 @@
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
-import java.util.ArrayList;
 
 /**
  * Created by dumitru on 15.04.16.

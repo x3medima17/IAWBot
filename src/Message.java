@@ -52,7 +52,7 @@ public class Message {
         }
 
         if (json.getAsJsonObject().has("text")) {
-            text = json.getAsJsonObject().get("text").toString();
+            text = json.getAsJsonObject().getAsJsonPrimitive("text").getAsString();
         }
 
         return new Message(messageId, date, user, chat, text);

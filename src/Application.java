@@ -14,7 +14,21 @@ public class Application {
         this.bot = bot;
         this.offset = 0;
     }
-    
+
+    private CommandHandler findHandler(String command){
+        CommandHandler result = null;
+        for(Tuple handler : handlers){
+            if(handler.x.equals(command))
+                result = (CommandHandler)handler.y;
+        }
+        return result;
+    }
+
+    private void runHandler(CommandHandler handler){
+        handler.before();
+        handler.handle();
+        handler.after();
+    }
 
     public void startIoLoop() throws IOException, InterruptedException {
         while (true) {
@@ -22,6 +36,11 @@ public class Application {
             for (Update update : updates) {
                 String command = update.getMessage().getText();
                 offset = update.getUpdateId()+1;
+                CommandHandler handler = findHandler(command);
+
+                if(handler != null){
+                    runHandler(handler);
+                }
                 System.out.println(command);
 
             }
