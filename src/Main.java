@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 
@@ -9,13 +8,14 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String args[]) throws IOException, InterruptedException {
-        Bot bot = new Bot("182400236:AAEQD1-dCo0PywmozSlFM8nD3ImJ0-UepRA");
+        Bot bot = new Bot("182348404:AAHbUrbCdHfWK4IAvx20SGkbimxLlJwE5ho");
         String me = bot.getMe();
 
         ArrayList<Tuple> handlers = new ArrayList<>();
         handlers.add(new Tuple("/hello",new HelloHandler()));
         handlers.add(new Tuple("/test", new TestHandler()));
-        handlers.add(new Tuple("/searchtrack", new SearchByTrackHandler()));
+        handlers.add(new Tuple("/searchartist", new SearchByArtistHandler()));
+        handlers.add(new Tuple("/searchtrack", new SearchByTrackNHandler()));
 
         Application application = new Application(handlers, bot);
         application.startIoLoop();
