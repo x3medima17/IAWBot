@@ -23,35 +23,3 @@ public class Main {
 
 }
 
-class TestHandler extends CommandHandler{
-    public void before() {
-        System.out.println("before test");
-    }
-
-    public void handle(Bot bot, Update update) throws UnsupportedEncodingException {
-
-        System.out.println("this is the test");
-        bot.sendMessage(update.getMessage().getChat().getId(), "test answer");
-    }
-
-    public void after() {
-        System.out.println("success");
-    }
-}
-
-class HelloHandler extends CommandHandler {
-    public void before() {
-        System.out.println("this is before implementation");
-    }
-
-    public void handle(Bot bot, Update update) throws UnsupportedEncodingException {
-        System.out.println("This is Hello world!");
-        bot.sendMessage(update.getMessage().getChat().getId(), "Hello");
-
-    }
-
-    public void after() {
-        System.out.println("After method");
-    }
-
-}
