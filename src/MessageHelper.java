@@ -16,7 +16,7 @@ public class MessageHelper {
     }
 
     private static String sendMessageToServer(String command) throws IOException {
-        String tempUrl = URLEncoder.encode(command, "utf-8");
+        /*String tempUrl = URLEncoder.encode(command, "utf-8");
         String URL = new String("http://api.duckduckgo.com/?q=" + tempUrl + "&format=json");
 
         Request request = new Request(URL);
@@ -25,12 +25,18 @@ public class MessageHelper {
 
         request.setHeaders("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11");
         request.setHeaders("Accept", "text/html, image/gif, image/jpeg, *; q=.2, /; q=.2");
+        request.setHeaders("Accept-Language", "ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3");
+        request.setHeaders("Accept-Encoding", "gzip, deflate, br");
         request.setHeaders("X-Compress", "1");
         request.setHeaders("DNT", "1");
+        request.setHeaders("Proxy-Authorization", "bdda94ad64da88bbef2a2dc79d50eba806eff268dc3acf14b5cbaad3d2b50bbf6b1299f1840f8734");
         request.setHeaders("Connection", "keep-alive");
+        request.setHeaders("Cache-Control", "max-age=0");
+
 
         request.send();
-        return jsonToAnswer(request.getResponse());
+        return jsonToAnswer(request.getResponse());*/
+        return "";
     }
 
     private static String jsonToAnswer(String json) {
