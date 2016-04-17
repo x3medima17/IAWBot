@@ -35,7 +35,8 @@ public class Application {
         while (true) {
             ArrayList<Update> updates = bot.getUpdates(offset);
             for (Update update : updates) {
-                String command = update.getMessage().getText();
+                String commandRaw = update.getMessage().getText();
+                String command=commandRaw.split(" ")[0];
                 offset = update.getUpdateId()+1;
                 CommandHandler handler = findHandler(command);
 

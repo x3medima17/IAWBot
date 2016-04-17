@@ -15,6 +15,7 @@ public class Main {
         ArrayList<Tuple> handlers = new ArrayList<>();
         handlers.add(new Tuple("/hello",new HelloHandler()));
         handlers.add(new Tuple("/test", new TestHandler()));
+        handlers.add(new Tuple("/searchtrack", new SearchByTrackHandler()));
 
         Application application = new Application(handlers, bot);
         application.startIoLoop();

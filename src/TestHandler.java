@@ -11,7 +11,7 @@ class TestHandler extends CommandHandler{
     public void handle(Bot bot, Update update) throws UnsupportedEncodingException {
 
         System.out.println("this is the test");
-        bot.sendMessage(update.getMessage().getChat().getId(), "test answer");
+        bot.sendMessage(update.getMessage().getChat().getId(), "test!!!! answer");
     }
 
     public void after() {
