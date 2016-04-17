@@ -1,12 +1,17 @@
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by dumitru on 14.04.16.
  */
 public class User {
     private int id;
-    private String firstName, lastName, username;
+    @SerializedName("first_name")
+    private String firstName;
+    @SerializedName("last_name")
+    private String lastName;
+    private String username;
 
     User(int id, String firstName, String lastName, String username) {
         this.id = id;
@@ -55,5 +60,6 @@ public class User {
     public String getUsername() {
         return username;
     }
+
 
 }

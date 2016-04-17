@@ -1,6 +1,8 @@
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
+import java.net.HttpURLConnection;
+
 /**
  * Created by dumitru on 14.04.16.
  */
@@ -21,7 +23,7 @@ public class Response {
         return result;
     }
 
-    static Response fromJson(String raw) {
+    static Response fromJson(String raw) throws TelegramException {
 
         JsonElement json = new JsonParser().parse(raw);
         boolean ok = json.getAsJsonObject().get("ok").getAsBoolean();
@@ -33,6 +35,9 @@ public class Response {
         } else {
             description = json.getAsJsonObject().get("description").toString();
             errno = json.getAsJsonObject().get("error_code").getAsInt();
+            if (errno != HttpURLConnection.HTTP_OK) {
+                throw new TelegramException(errno, description);
+            }
         }
         return new Response(ok,result,description,errno);
     }
