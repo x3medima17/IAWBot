@@ -5,6 +5,7 @@ import java.net.HttpURLConnection;
 import java.net.Socket;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -20,6 +21,7 @@ public class Request {
     public HashMap<String, String> data;
     public String response;
     public String url;
+    private HashMap<String, String> headers;
 
     public String getResponse() {
         return response;
@@ -32,6 +34,7 @@ public class Request {
     Request(String url) {
         this.url = url;
         data = new HashMap<>();
+        headers = new HashMap<>();
     }
 
     public void setHost(String host) {
@@ -52,6 +55,10 @@ public class Request {
 
     public void setMethod(String method) {
         this.method = method;
+    }
+
+    public void setHeaders(String key, String value) {
+        headers.put(key, value);
     }
 
     public void send() throws UnsupportedEncodingException {
@@ -83,6 +90,13 @@ public class Request {
             url = new URL(targetURL);
             connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod(method);
+
+            if (!headers.isEmpty()) {
+                for (Map.Entry<String, String> entry : headers.entrySet()) {
+                    connection.setRequestProperty(entry.getKey(), entry.getValue());
+                }
+            }
+
             connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 
             connection.setRequestProperty("Content-Length", "" +

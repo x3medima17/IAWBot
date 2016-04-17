@@ -12,13 +12,25 @@ import java.util.Iterator;
 
 public class MessageHelper {
     public static String getAnswer(String command) throws IOException {
-        //JsonElement resultJson = new JsonParser().parse(command);
+        return sendMessageToServer(command);
+    }
+
+    private static String sendMessageToServer(String command) throws IOException {
         String tempUrl = URLEncoder.encode(command, "utf-8");
-        String duckURL = new String("http://api.duckduckgo.com/?q=" + tempUrl + "&format=json&pretty=1");
-        Request req = new Request(duckURL);
-        req.setMethod();
-        String answer = req.getResponse();
-        return answer;
+        String URL = new String("http://api.duckduckgo.com/?q=" + tempUrl + "&format=json");
+
+        Request request = new Request(URL);
+        request.setMethod("GET");
+        request.setPort(80);
+
+        request.setHeaders("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11");
+        request.setHeaders("Accept", "text/html, image/gif, image/jpeg, *; q=.2, /; q=.2");
+        request.setHeaders("X-Compress", "1");
+        request.setHeaders("DNT", "1");
+        request.setHeaders("Connection", "keep-alive");
+
+        request.send();
+        return jsonToAnswer(request.getResponse());
     }
 
     private static String jsonToAnswer(String json) {
