@@ -2,6 +2,7 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,6 +17,7 @@ public class Request {
     public HashMap<String, String> data;
     public String response;
     public String url;
+    private HashMap<String, String> headers;
 
     public String getResponse() {
         return response;
@@ -30,6 +32,7 @@ public class Request {
     Request(String url) {
         this.url = url;
         data = new HashMap<>();
+        headers = new HashMap<>();
     }
 
     public void setHost(String host) {
@@ -52,6 +55,10 @@ public class Request {
         this.method = method;
     }
 
+    public void setHeaders(String key, String value) {
+        headers.put(key, value);
+    }
+
     public void send() throws UnsupportedEncodingException {
         URL url;
         HttpURLConnection connection = null;
@@ -63,13 +70,17 @@ public class Request {
         else
             targetURL = this.url;
 
-        for (Map.Entry<String, String> entry : data.entrySet()) {
-            String key = URLEncoder.encode(entry.getKey());
-            String value = URLEncoder.encode(entry.getValue());
-            body += String.format("%s=%s&", key, value);
-        }
-        if (body.length() > 0) {
-            body = body.substring(0, body.length() - 1);
+        try {
+            for (Map.Entry<String, String> entry : data.entrySet()) {
+                String key = URLEncoder.encode(entry.getKey());
+                String value = URLEncoder.encode(entry.getValue());
+                body += String.format("%s=%s&", key, value);
+            }
+            if (body.length() > 0) {
+                body = body.substring(0, body.length() - 1);
+            }
+        } catch (NullPointerException e) {
+            e.printStackTrace();
         }
 
         try {
@@ -78,6 +89,13 @@ public class Request {
             connection = (HttpURLConnection) url.openConnection();
 
             connection.setRequestMethod(method);
+
+            if (!headers.isEmpty()) {
+                for (Map.Entry<String, String> entry : headers.entrySet()) {
+                    connection.setRequestProperty(entry.getKey(), entry.getValue());
+                }
+            }
+
             connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 
             connection.setRequestProperty("Content-Length", "" +
@@ -117,8 +135,5 @@ public class Request {
                 connection.disconnect();
             }
         }
-
     }
-
-
 }
