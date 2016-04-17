@@ -2,31 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a150298b-0fbf-415d-af11-afc76f4d0761" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/MessageHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/IAWBot/Application.class" afterPath="$PROJECT_DIR$/out/production/IAWBot/Application.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/IAWBot/Bot.class" afterPath="$PROJECT_DIR$/out/production/IAWBot/Bot.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/IAWBot/Chat.class" afterPath="$PROJECT_DIR$/out/production/IAWBot/Chat.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/IAWBot/CommandHandler.class" afterPath="$PROJECT_DIR$/out/production/IAWBot/CommandHandler.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/IAWBot/HelloHandler.class" afterPath="$PROJECT_DIR$/out/production/IAWBot/HelloHandler.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/IAWBot/InlineQuery.class" afterPath="$PROJECT_DIR$/out/production/IAWBot/InlineQuery.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/IAWBot/JSON.class" afterPath="$PROJECT_DIR$/out/production/IAWBot/JSON.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/IAWBot/Main.class" afterPath="$PROJECT_DIR$/out/production/IAWBot/Main.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/IAWBot/Message.class" afterPath="$PROJECT_DIR$/out/production/IAWBot/Message.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/IAWBot/Request.class" afterPath="$PROJECT_DIR$/out/production/IAWBot/Request.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/IAWBot/Response.class" afterPath="$PROJECT_DIR$/out/production/IAWBot/Response.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/IAWBot/Tuple.class" afterPath="$PROJECT_DIR$/out/production/IAWBot/Tuple.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/IAWBot/Update.class" afterPath="$PROJECT_DIR$/out/production/IAWBot/Update.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/IAWBot/User.class" afterPath="$PROJECT_DIR$/out/production/IAWBot/User.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IAWBot.iml" afterPath="$PROJECT_DIR$/IAWBot.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Application.java" afterPath="$PROJECT_DIR$/src/Application.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Bot.java" afterPath="$PROJECT_DIR$/src/Bot.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/CommandHandler.java" afterPath="$PROJECT_DIR$/src/CommandHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main.java" afterPath="$PROJECT_DIR$/src/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Request.java" afterPath="$PROJECT_DIR$/src/Request.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Update.java" afterPath="$PROJECT_DIR$/src/Update.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/User.java" afterPath="$PROJECT_DIR$/src/User.java" />
     </list>
     <ignored path="IAWBot.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -749,12 +725,12 @@
       <created>1460035879576</created>
       <option name="number" value="Default" />
       <updated>1460035879576</updated>
-      <workItem from="1460878945481" duration="13957000" />
+      <workItem from="1460878945481" duration="14196000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13957000" />
+    <option name="totallyTimeSpent" value="14196000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
