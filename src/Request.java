@@ -20,6 +20,7 @@ public class Request {
     public HashMap<String, String> data;
     public String response;
     public String url;
+    public HashMap<String, String> headers;
 
     public String getResponse() {
         return response;
@@ -27,11 +28,20 @@ public class Request {
 
     Request() {
         data = new HashMap<>();
+        headers = new HashMap<>();
     }
 
     Request(String url) {
         this.url = url;
         data = new HashMap<>();
+        headers = new HashMap<>();
+    }
+
+    Request(String url, HashMap<String, String> headers) {
+        this.url = url;
+        this.headers = headers;
+        data = new HashMap<>();
+
     }
 
     public void setHost(String host) {
@@ -52,6 +62,10 @@ public class Request {
 
     public void setMethod(String method) {
         this.method = method;
+    }
+
+    public void setHeader(String headerKey, String headerValue) {
+        headers.put(headerKey, headerValue);
     }
 
     public void send() throws UnsupportedEncodingException {
@@ -83,6 +97,9 @@ public class Request {
 
             connection.setRequestProperty("Content-Length", "" +
                     Integer.toString(body.getBytes().length));
+            for (String key : headers.keySet()){
+                connection.setRequestProperty(key, headers.get(key));
+            }
 
             connection.setUseCaches(false);
             connection.setDoInput(true);
