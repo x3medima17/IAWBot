@@ -16,6 +16,8 @@ public class Main {
         handlers.add(new Tuple("/test", new TestHandler()));
         handlers.add(new Tuple("/searchartist", new SearchByArtistHandler()));
         handlers.add(new Tuple("/searchtrack", new SearchByTrackNHandler()));
+        handlers.add(new Tuple("/searchalbum", new SearchByAlbumHandler()));
+        handlers.add(new Tuple("/searchsimilar", new SimilarHandler()));
 
         Application application = new Application(handlers, bot);
         application.startIoLoop();

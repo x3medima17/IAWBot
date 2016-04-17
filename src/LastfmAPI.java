@@ -14,6 +14,8 @@ public class LastfmAPI {
     private static final String host = "http://ws.audioscrobbler.com";
     private static final String artistSearch = "/2.0/?method=artist.search&artist=";
     private static final String trackSearch = "/2.0/?method=track.search&track=";
+    private static final String albumSearch="/2.0/?method=album.search&album=";
+    private static final String similarSearch = "/2.0/?method=artist.getsimilar&artist=";
 
     public LastfmAPI() {
 
@@ -55,6 +57,22 @@ public class LastfmAPI {
         return json.toString();
     }
 
+    public String SearchForAlbum(String nameAlbum) throws UnsupportedEncodingException {
+        if(nameAlbum==null) return "";
+
+            String request=host+albumSearch+nameAlbum+andkey+"&format=json";
+            Request req = new Request(request);
+            req.setMethod("GET");
+            req.setPort(80);
+        req.send();
+            ResponseLast r = ResponseLast.fromJsonAlbum(req.getResponse());
+
+            JsonElement json = new JsonParser().parse(r.getResult());
+            return json.toString();
+
+    }
+
+
     private static class ResponseLast {
         private String resulturl;
         private String description;
@@ -66,6 +84,15 @@ public class LastfmAPI {
 
         String getResult() {
             return resulturl;
+        }
+
+        static ResponseLast fromJsonSimilar(String raw) {
+            JsonElement json = new JsonParser().parse(raw);
+            String resulturl = json.getAsJsonObject().get("similarartists")
+                    .getAsJsonObject().get("artist").getAsJsonArray().get(0)
+                    .getAsJsonObject().get("url").toString();
+            String description = "just a description";
+            return new ResponseLast(resulturl, description);
         }
 
         static ResponseLast fromJsonTrack(String raw) {
@@ -104,6 +131,33 @@ public class LastfmAPI {
             return new ResponseLast("", "");
         }
 
+        static ResponseLast fromJsonAlbum(String raw) {
+            String resulturl="Sorry, we couldn't find your request";
+            JsonElement json = new JsonParser().parse(raw);
+            int number=json.getAsJsonObject().get("results")
+                    .getAsJsonObject().get("opensearch:totalResults").getAsInt();
+            if(number>0) {
+                resulturl = json.getAsJsonObject().get("results")
+                        .getAsJsonObject().get("albummatches").getAsJsonObject()
+                        .get("album").getAsJsonArray().get(0)
+                        .getAsJsonObject().get("url").toString();
+                resulturl=resulturl.replaceAll("\"", "");
+            }
+            String description = "just a description";
+            return new ResponseLast(resulturl,description);
+        }
+
+    }
+
+    public String searchForSimilar(String artistName) throws UnsupportedEncodingException{
+        String request = host + similarSearch + artistName + andkey + "&format=json";
+        Request req = new Request(request);
+        req.setMethod("GET");
+        req.setPort(80);
+        req.send();
+        ResponseLast r = ResponseLast.fromJsonSimilar(req.getResponse());
+        JsonElement json = new JsonParser().parse(r.getResult());
+        return json.toString();
     }
 
 
