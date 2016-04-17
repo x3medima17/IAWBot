@@ -8,9 +8,9 @@ import java.io.IOException;
 public class Config {
     private JsonElement jsonElement = null;
 
-    public Config() {
+    public Config(String file) {
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader("config/token.json"));
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
             StringBuilder json = new StringBuilder();
             String temp;
 

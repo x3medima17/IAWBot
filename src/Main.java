@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String args[]) throws IOException, InterruptedException {
-        Config config = new Config();
+        Config config = new Config("config/token.json");
         Bot bot = new Bot(config.get("token"));
         String me = bot.getMe();
 
