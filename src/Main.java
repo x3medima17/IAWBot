@@ -8,18 +8,17 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String args[]) throws IOException, InterruptedException {
+		Bot bot = new Bot("206386206:AAFesB-wlrz6o6sUfQfvxVpL26-pcptF0Nw");
         String me = bot.getMe();
 
         ArrayList<Tuple> handlers = new ArrayList<>();
         handlers.add(new Tuple("/hello",new HelloHandler()));
         handlers.add(new Tuple("/document",new DocumentHandler(bot.)));
 
+
         Application application = new Application(handlers, bot);
         application.startIoLoop();
-
     }
-
-
 }
 
 class HelloHandler extends CommandHandler {
@@ -27,13 +26,9 @@ class HelloHandler extends CommandHandler {
         System.out.println("this is before implementation");
     }
 
-    public void handle() {
-        System.out.println("This is Hello world!");
-
-    }
+    public void handle() { System.out.println("This is Hello world!"); }
 
     public void after() {
         System.out.println("After method");
     }
-
 }

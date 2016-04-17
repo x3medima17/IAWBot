@@ -35,11 +35,14 @@ public class Application {
             ArrayList<Update> updates = bot.getUpdates(offset);
             for (Update update : updates) {
                 String command = update.getMessage().getText();
-                offset = update.getUpdateId()+1;
+                offset = update.getUpdateId() + 1;
                 CommandHandler handler = findHandler(command);
 
-                if(handler != null){
+                if (handler != null) {
                     runHandler(handler);
+                } else {
+                    Message message = update.getMessage();
+                    bot.sendMessage(message.getChat().getId(), MessageHelper.getAnswer(command));
                 }
                 System.out.println(command);
             }
