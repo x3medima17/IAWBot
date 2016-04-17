@@ -1,8 +1,12 @@
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by dumitru on 15.04.16.
  */
 public class Message {
-    private int messageId, date;
+    @SerializedName("message_id")
+    private int messageId;
+    private int date;
     private User from;
     private Chat chat;
     private String text;
@@ -34,5 +38,6 @@ public class Message {
     public Chat getChat() {
         return chat;
     }
+
 
 }
