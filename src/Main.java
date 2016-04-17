@@ -15,6 +15,7 @@ public class Main {
 
         ArrayList<Tuple> handlers = new ArrayList<>();
         handlers.add(new Tuple("/hello", new HelloHandler()));
+        handlers.add(new Tuple("/audio", new AudioHandler()));
         handlers.add(new Tuple("any natural language",new NaturalLanguageHandler()));
 
         Application application = new Application(handlers, bot);
@@ -38,6 +39,20 @@ class HelloHandler extends CommandHandler {
     }
 
 }
+
+class AudioHandler extends CommandHandler {
+    public void before() {
+    }
+
+    public void handle() throws IOException {
+        getBot().sendAudio(getChatId());
+    }
+
+    public void after() {
+    }
+
+}
+
 class NaturalLanguageHandler extends CommandHandler {
 
     public void before() {

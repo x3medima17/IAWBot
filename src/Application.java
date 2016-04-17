@@ -29,7 +29,7 @@ public class Application {
         return result;
     }
 
-    private void runHandler(CommandHandler handler) throws UnsupportedEncodingException {
+    private void runHandler(CommandHandler handler) throws IOException {
         handler.before();
         handler.handle();
         handler.after();

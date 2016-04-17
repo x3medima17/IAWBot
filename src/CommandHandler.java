@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 /**
@@ -40,7 +41,7 @@ public  abstract class CommandHandler {
     {
         return command;
     }
-    public void handle() throws UnsupportedEncodingException {
+    public void handle() throws IOException {
         throw new UnsupportedOperationException("Not implemented yet");
     }
 
