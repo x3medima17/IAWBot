@@ -18,13 +18,17 @@ public class Application {
     private CommandHandler findHandler(String command){
         CommandHandler result = null;
         for(Tuple handler : handlers){
-            if(handler.x.equals(command))
-                result = (CommandHandler)handler.y;
+            if(handler.x.equals(command)) {
+                result = (CommandHandler) handler.y;
+            }
+        }
+        if (result == null){
+            result = findHandler("any natural language");
         }
         return result;
     }
 
-    private void runHandler(CommandHandler handler){
+    private void runHandler(CommandHandler handler) throws IOException {
         handler.before();
         handler.handle();
         handler.after();
@@ -39,6 +43,9 @@ public class Application {
                 CommandHandler handler = findHandler(command);
 
                 if(handler != null){
+                    handler.setBot(bot);
+                    handler.setChatId(update.getMessage().getChat().getId());
+                    handler.setCommand(command);
                     runHandler(handler);
                 }
                 System.out.println(command);
