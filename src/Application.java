@@ -49,7 +49,6 @@ public class Application {
                     runHandler(handler);
                 }
                 System.out.println(command);
-
             }
             Thread.sleep(400);
         }

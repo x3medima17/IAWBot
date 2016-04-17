@@ -10,6 +10,7 @@ public class Message {
     private Chat chat;
     private String text;
 
+
     public Message(int messageId, int date, User from, Chat chat, String text) {
         this.messageId = messageId;
         this.date = date;
@@ -38,6 +39,7 @@ public class Message {
         return chat;
     }
 
+
     static Message fromJson(String raw) {
         JsonElement json = new JsonParser().parse(raw);
 
@@ -54,6 +56,7 @@ public class Message {
         if (json.getAsJsonObject().has("text")) {
             text = json.getAsJsonObject().getAsJsonPrimitive("text").getAsString();
         }
+
 
         return new Message(messageId, date, user, chat, text);
     }

@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
+
 /**
  * Created by dumitru on 07.04.16.
  */
@@ -20,6 +21,8 @@ public class Main {
         Application application = new Application(handlers, bot);
         application.startIoLoop();
     }
+
+
 }
 
 class HelloHandler extends CommandHandler {
