@@ -1,7 +1,3 @@
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
-
-
 /**
  * Created by dumitru on 15.04.16.
  */
@@ -20,18 +16,6 @@ public class Update {
 
     public Message getMessage() {
         return message;
-    }
-
-    static Update fromJson(String raw) {
-        JsonElement json = new JsonParser().parse(raw);
-        int updateId = json.getAsJsonObject().get("update_id").getAsInt();
-        Message message = null;
-
-        if (json.getAsJsonObject().has("message")) {
-            message = Message.fromJson(json.getAsJsonObject().get("message").toString());
-        }
-
-        return new Update(updateId, message);
     }
 
 

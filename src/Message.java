@@ -1,6 +1,3 @@
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
-
 /**
  * Created by dumitru on 15.04.16.
  */
@@ -38,23 +35,4 @@ public class Message {
         return chat;
     }
 
-    static Message fromJson(String raw) {
-        JsonElement json = new JsonParser().parse(raw);
-
-        int messageId = json.getAsJsonObject().get("message_id").getAsInt();
-        int date = json.getAsJsonObject().get("date").getAsInt();
-        Chat chat = Chat.fromJson(json.getAsJsonObject().get("chat").toString());
-        User user = null;
-        String text = null;
-
-        if (json.getAsJsonObject().has("user")) {
-            user = User.fromJson(json.getAsJsonObject().get("user").toString());
-        }
-
-        if (json.getAsJsonObject().has("text")) {
-            text = json.getAsJsonObject().getAsJsonPrimitive("text").getAsString();
-        }
-
-        return new Message(messageId, date, user, chat, text);
-    }
 }

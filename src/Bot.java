@@ -58,7 +58,8 @@ public class Bot {
         ArrayList<Update> updates = new ArrayList<>();
 
         for (JsonElement item : json.getAsJsonArray()) {
-            Update curr =  Update.fromJson(item.toString());
+            JSON jsonParser  = new JSON(item.toString());
+            Update curr = (Update)jsonParser.parse(Update.class);
             updates.add(curr);
         }
         return updates;
