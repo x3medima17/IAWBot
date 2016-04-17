@@ -33,6 +33,4 @@ public class Update {
 
         return new Update(updateId, message);
     }
-
-
 }

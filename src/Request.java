@@ -65,13 +65,17 @@ public class Request {
         else
             targetURL = this.url;
 
-        for (Map.Entry<String, String> entry : data.entrySet()) {
-            String key = URLEncoder.encode(entry.getKey());
-            String value = URLEncoder.encode(entry.getValue());
-            body += String.format("%s=%s&", key, value);
-        }
-        if (body.length() > 0) {
-            body = body.substring(0, body.length() - 1);
+        try {
+            for (Map.Entry<String, String> entry : data.entrySet()) {
+                String key = URLEncoder.encode(entry.getKey());
+                String value = URLEncoder.encode(entry.getValue());
+                body += String.format("%s=%s&", key, value);
+            }
+            if (body.length() > 0) {
+                body = body.substring(0, body.length() - 1);
+            }
+        } catch (NullPointerException e) {
+            e.printStackTrace();
         }
 
         try {
@@ -115,8 +119,5 @@ public class Request {
                 connection.disconnect();
             }
         }
-
     }
-
-
 }

@@ -42,7 +42,7 @@ public class Bot {
         return req.response;
     }
 
-    public ArrayList<Update>  getUpdates(int offset) throws UnsupportedEncodingException {
+    public ArrayList<Update> getUpdates(int offset) throws UnsupportedEncodingException {
         HashMap<String, String> data = new HashMap<>();
         data.put("offset",Integer.toString(offset));
         String url = String.format("%s%s/getUpdates", prefix, token);

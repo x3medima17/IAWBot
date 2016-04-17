@@ -4,6 +4,7 @@ import com.google.gson.JsonParser;
 /**
  * Created by dumitru on 14.04.16.
  */
+
 public class User {
     private int id;
     private String firstName, lastName, username;
