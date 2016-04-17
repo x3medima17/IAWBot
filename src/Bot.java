@@ -1,3 +1,4 @@
+import Keyboard.*;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
@@ -17,6 +18,22 @@ public class Bot {
     }
 
     Bot(){}
+
+    public String sendMessage(int chatId, String text, Keyboard reply_markup) throws UnsupportedEncodingException{
+        HashMap<String, String> data = new HashMap<>();
+        data.put("chat_id", Integer.toString(chatId));
+        data.put("text", text);
+        data.put("reply_markup", reply_markup.toString());
+
+        String url = String.format("%s%s/sendMessage", prefix, token);
+        Request req = new Request(url);
+        req.setMethod("GET");
+        req.setPort(80);
+        req.setData(data);
+        req.send();
+
+        return req.response;
+    }
 
     public String sendMessage(int chatId, String text) throws UnsupportedEncodingException {
         HashMap<String, String> data = new HashMap<>();
