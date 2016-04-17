@@ -1,8 +1,4 @@
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
-
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -10,20 +6,26 @@ import java.util.HashMap;
  */
 public class ApiAi {
     private String token;
+    private String sessionId;
+    private String lang;
+
     private String prefix = "https://api.api.ai/api/";
 
-    ApiAi(String token) {
-        this.token = token;
+    ApiAi(Config config) {
+        this.token = config.get("token");
+        this.sessionId = config.get("sessionId");
+        this.lang = config.get("lang");
     }
 
     ApiAi(){}
 
-    public String sendMessage(int chatId, String text) throws UnsupportedEncodingException {
+    public String getJsonByMessage(String msg) throws UnsupportedEncodingException {
         HashMap<String, String> data = new HashMap<>();
-        data.put("chat_id", Integer.toString(chatId));
-        data.put("text", text);
+        data.put("query", msg);
+        data.put("lang", lang);
+        data.put("sessionId", sessionId);
 
-        String url = String.format("%s%s/sendMessage", prefix, token);
+        String url = String.format("%s/query", prefix);
         Request req = new Request(url);
         req.setMethod("GET");
         req.setPort(80);
@@ -32,37 +34,4 @@ public class ApiAi {
 
         return req.response;
     }
-
-    public String getMe() throws UnsupportedEncodingException {
-        String url = String.format("%s%s/getMe", prefix, token);
-        Request req = new Request(url);
-        req.setMethod("GET");
-        req.setPort(80);
-        req.send();
-        return req.response;
-    }
-
-    public ArrayList<Update>  getUpdates(int offset) throws UnsupportedEncodingException {
-        HashMap<String, String> data = new HashMap<>();
-        data.put("offset",Integer.toString(offset));
-        String url = String.format("%s%s/getUpdates", prefix, token);
-        Request req = new Request(url);
-        req.setData(data);
-        req.setMethod("GET");
-        req.setPort(80);
-        req.setData(data);
-        req.send();
-
-        Response r = Response.fromJson(req.getResponse());
-        JsonElement json = new JsonParser().parse(r.getResult());
-        ArrayList<Update> updates = new ArrayList<>();
-
-        for (JsonElement item : json.getAsJsonArray()) {
-            Update curr =  Update.fromJson(item.toString());
-            updates.add(curr);
-        }
-        return updates;
-    }
-
-
 }
