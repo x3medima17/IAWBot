@@ -44,8 +44,9 @@ class HelloHandler extends CommandHandler {
         System.out.println("this is before implementation");
     }
 
-    public void handle() {
+    public void handle(Bot bot, Update update) throws UnsupportedEncodingException {
         System.out.println("This is Hello world!");
+        bot.sendMessage(update.getMessage().getChat().getId(), "Hello");
 
     }
 
