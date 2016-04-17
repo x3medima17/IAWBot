@@ -1,13 +1,9 @@
-import sun.misc.IOUtils;
-
 import java.io.*;
 import java.net.HttpURLConnection;
-import java.net.Socket;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 /**
  * Created by dumitru on 07.04.16.
@@ -98,7 +94,7 @@ public class Request {
             connection.setRequestProperty("Content-Length", "" +
                     Integer.toString(body.getBytes().length));
             for (String key : headers.keySet()){
-                connection.setRequestProperty(key, headers.get(key));
+                connection.setRequestProperty(URLEncoder.encode(key), URLEncoder.encode(headers.get(key) ) );
             }
 
             connection.setUseCaches(false);
@@ -108,6 +104,7 @@ public class Request {
             //Send request
             DataOutputStream wr = new DataOutputStream(
                     connection.getOutputStream());
+
             wr.writeBytes(body);
             wr.flush();
             wr.close();

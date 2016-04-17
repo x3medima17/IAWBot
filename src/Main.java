@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * Created by dumitru on 07.04.16.
@@ -8,16 +7,18 @@ import java.util.ArrayList;
 public class Main {
     public static void main(String args[]) throws IOException, InterruptedException {
 
-        Config config = new Config("config/token.json");
-        Bot bot = new Bot(config.get("token"));
-        String me = bot.getMe();
+//        Config config = new Config("config/token.json");
+//        Bot bot = new Bot(config.get("token"));
+//        String me = bot.getMe();
+//
+//        ArrayList<Tuple> handlers = new ArrayList<>();
+//        handlers.add(new Tuple("/hello", new HelloHandler()));
+//
+//        Application application = new Application(handlers, bot);
+//        application.startIoLoop();
 
-        ArrayList<Tuple> handlers = new ArrayList<>();
-        handlers.add(new Tuple("/hello", new HelloHandler()));
-        
-        Application application = new Application(handlers, bot);
-        application.startIoLoop();
-
+        ApiAi apiAi = new ApiAi(new Config("config/api_ai.json"));
+        System.out.println( apiAi.getJsonByMessage("Find me a cat") );
     }
 }
 

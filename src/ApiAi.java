@@ -9,7 +9,7 @@ public class ApiAi {
     private String sessionId;
     private String lang;
 
-    private String prefix = "https://api.api.ai/api/";
+    private String prefix = "http://api.api.ai/api";
 
     ApiAi(Config config) {
         this.token = config.get("token");
@@ -28,9 +28,11 @@ public class ApiAi {
         String url = String.format("%s/query", prefix);
         Request req = new Request(url);
         req.setMethod("GET");
+        req.setHeader("Authorization", "Bearer "+token);
         req.setPort(80);
         req.setData(data);
         req.send();
+        System.out.println(req.response);
 
         return req.response;
     }
