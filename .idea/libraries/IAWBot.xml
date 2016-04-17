@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="IAWBot">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/out/production/IAWBot/gson-2.2.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/production/IAWBot/json-simple-1.1.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
