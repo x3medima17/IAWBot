@@ -44,6 +44,7 @@ public class Application {
                     Message message = update.getMessage();
                     bot.sendMessage(message.getChat().getId(), MessageHelper.getAnswer(command));
                 }
+                System.out.println(command);
             }
             Thread.sleep(400);
         }
