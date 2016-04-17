@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 /**
@@ -24,9 +25,9 @@ public class Application {
         return result;
     }
 
-    private void runHandler(CommandHandler handler){
+    private void runHandler(CommandHandler handler, Bot bot, Update update) throws UnsupportedEncodingException {
         handler.before();
-        handler.handle();
+        handler.handle(bot, update);
         handler.after();
     }
 
@@ -39,7 +40,7 @@ public class Application {
                 CommandHandler handler = findHandler(command);
 
                 if(handler != null){
-                    runHandler(handler);
+                    runHandler(handler, bot, update);
                 }
                 System.out.println(command);
 

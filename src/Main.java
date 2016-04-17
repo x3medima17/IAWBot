@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 
@@ -13,13 +14,29 @@ public class Main {
 
         ArrayList<Tuple> handlers = new ArrayList<>();
         handlers.add(new Tuple("/hello",new HelloHandler()));
-
+        handlers.add(new Tuple("/test", new TestHandler()));
 
         Application application = new Application(handlers, bot);
         application.startIoLoop();
     }
 
 
+}
+
+class TestHandler extends CommandHandler{
+    public void before() {
+        System.out.println("before test");
+    }
+
+    public void handle(Bot bot, Update update) throws UnsupportedEncodingException {
+
+        System.out.println("this is the test");
+        bot.sendMessage(update.getMessage().getChat().getId(), "test answer");
+    }
+
+    public void after() {
+        System.out.println("success");
+    }
 }
 
 class HelloHandler extends CommandHandler {
