@@ -1,13 +1,9 @@
-import sun.misc.IOUtils;
-
 import java.io.*;
 import java.net.HttpURLConnection;
-import java.net.Socket;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 /**
  * Created by dumitru on 07.04.16.
@@ -27,6 +23,8 @@ public class Request {
 
     Request() {
         data = new HashMap<>();
+        port = 80;
+        method = "GET";
     }
 
     Request(String url) {
@@ -78,6 +76,7 @@ public class Request {
             //Create connection
             url = new URL(targetURL);
             connection = (HttpURLConnection) url.openConnection();
+
             connection.setRequestMethod(method);
             connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 
@@ -95,9 +94,12 @@ public class Request {
             wr.flush();
             wr.close();
 
+            HttpConnectionCodeHandler.handle(connection);
+
             //Get Response
             InputStream is = connection.getInputStream();
             BufferedReader rd = new BufferedReader(new InputStreamReader(is));
+
             String line;
             StringBuffer response = new StringBuffer();
             while ((line = rd.readLine()) != null) {
