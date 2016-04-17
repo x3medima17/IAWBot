@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String args[]) throws IOException, InterruptedException {
-        Bot bot = new Bot("212445639:AAFWI61KfTxpBAZJqOnH2VuoedYHQlnO7WE");
+        Bot bot = new Bot("182400236:AAEQD1-dCo0PywmozSlFM8nD3ImJ0-UepRA");
         String me = bot.getMe();
 
         ArrayList<Tuple> handlers = new ArrayList<>();
@@ -17,7 +17,6 @@ public class Main {
 
         Application application = new Application(handlers, bot);
         application.startIoLoop();
-
     }
 
 
