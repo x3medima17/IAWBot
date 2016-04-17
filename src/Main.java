@@ -2,26 +2,24 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
-
 /**
  * Created by dumitru on 07.04.16.
  */
 
 public class Main {
     public static void main(String args[]) throws IOException, InterruptedException {
-        Bot bot = new Bot("193681347:AAHWsNCtGVXxcTaCYfSiiy7r5kEFZVldZM4");
+
+        Config config = new Config("config/token.json");
+        Bot bot = new Bot(config.get("token"));
         String me = bot.getMe();
 
         ArrayList<Tuple> handlers = new ArrayList<>();
-        handlers.add(new Tuple("/hello",new HelloHandler()));
+        handlers.add(new Tuple("/hello", new HelloHandler()));
         handlers.add(new Tuple("any natural language",new NaturalLanguageHandler()));
-
 
         Application application = new Application(handlers, bot);
         application.startIoLoop();
     }
-
-
 }
 
 class HelloHandler extends CommandHandler {
