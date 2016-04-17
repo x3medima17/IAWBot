@@ -1,3 +1,4 @@
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
@@ -23,10 +24,31 @@ public class LastfmAPI {
             req.setPort(80);
             //req.setData(data);
             req.send();
-            Response r = Response.fromJson(req.getResponse());
+            ResponseLast r = ResponseLast.fromJson(req.getResponse());
+
             JsonElement json = new JsonParser().parse(r.getResult());
             return json.toString();
         }
+    private static class ResponseLast{
+        private String resulturl;
+        private String description;
+        ResponseLast( String resulturl, String description) {
+            this.resulturl = resulturl;
+            this.description = description;
+        }
+        String getResult(){
+            return resulturl;}
+        static ResponseLast fromJson(String raw) {
+            JsonElement json = new JsonParser().parse(raw);
+            String resulturl=json.getAsJsonObject().get("results")
+                    .getAsJsonObject().get("artistmatches").getAsJsonObject()
+                    .get("artist").getAsJsonArray().get(0)
+                    .getAsJsonObject().get("url").toString();
+            String description = "just a description";
+            return new ResponseLast(resulturl,description);
+        }
+
+    }
 
 
 }

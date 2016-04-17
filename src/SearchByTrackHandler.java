@@ -16,9 +16,10 @@ public class SearchByTrackHandler extends CommandHandler{
         System.out.println(msg);
 
         LastfmAPI lastik=new LastfmAPI();
-        String response=lastik.SearchForName("cher");
+        String response=lastik.SearchForName(msg);
+        System.out.println(response);
 
-      //  bot.sendMessage(update.getMessage().getChat().getId(), msg[3]);//+" "+response);
+        bot.sendMessage(update.getMessage().getChat().getId(), response);//+" "+response);
     }
 
     public void after() {
